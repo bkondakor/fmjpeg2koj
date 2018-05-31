@@ -14,7 +14,7 @@ find_package(OpenJPEG REQUIRED CONFIG HINTS ${OPENJPEG})
 
 INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/include ${DCMTK_INCLUDE_DIRS} ${OPENJPEG_INCLUDE_DIRS})
 LINK_DIRECTORIES(${FMJPEG2K}/lib)
-add_definitions(-DOPJ_STATIC)
+#add_definitions(-DOPJ_STATIC)
 add_definitions(-Dfmjpeg2k_EXPORTS)
 
 set(fmjpeg2k_HEADERS
@@ -48,25 +48,25 @@ endif()
 
 ADD_EXECUTABLE(dcmcjp2k dcmcjp2k.cc)
 TARGET_LINK_LIBRARIES(dcmcjp2k
-	${DCMTK_LIBRARIES}
-	openjp2
-	fmjpeg2k
+		fmjpeg2k
+		${DCMTK_LIBRARIES}
+		openjp2
 	)
 
 ADD_EXECUTABLE(dcmdjp2k dcmdjp2k.cc)
 TARGET_LINK_LIBRARIES(dcmdjp2k
-	${DCMTK_LIBRARIES}
-	openjp2
-	fmjpeg2k
+		fmjpeg2k
+		${DCMTK_LIBRARIES}
+		openjp2
 	)
 
 
 add_library(fmjpeg2k ${fmjpeg2k_SRCS})
 set(fmjpeg2k_LIBRARY_NAME fmjpeg2k)
 TARGET_LINK_LIBRARIES(fmjpeg2k
-	${DCMTK_LIBRARIES}
-	openjp2
-	)
+		${DCMTK_LIBRARIES}
+		openjp2
+		)
 
 include(GenerateExportHeader)
 generate_export_header(fmjpeg2k)
